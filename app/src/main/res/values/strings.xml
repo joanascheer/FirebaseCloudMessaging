@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Firebase Cloud Messaging</string>
+    <string name="handle_notification_now">HANDLE</string>
+</resources>

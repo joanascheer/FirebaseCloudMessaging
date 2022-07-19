@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.view.MainActivity">
+
+    <TextView
+        android:id="@+id/tvTokenName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Token: "
+        android:layout_margin="@dimen/margin_16"
+        android:textSize="@dimen/size_20"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTokenValue"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/margin_16"
+        android:textSize="@dimen/size_20"
+        android:text="token aqui"
+        app:layout_constraintStart_toEndOf="@id/tvTokenName"
+        app:layout_constraintTop_toTopOf="parent"
+      />
+
+    <TextView
+        android:id="@+id/tvMsgTitleName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_16"
+        android:textSize="@dimen/size_20"
+        android:text="Título: "
+        app:layout_constraintTop_toBottomOf="@id/tvTokenValue"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvMsgTitleValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="título da mensagem aqui"
+        android:layout_margin="@dimen/margin_16"
+        android:textSize="@dimen/size_20"
+        app:layout_constraintStart_toEndOf="@id/tvMsgTitleName"
+        app:layout_constraintTop_toBottomOf="@id/tvTokenValue" />
+
+    <TextView
+        android:id="@+id/tvMsgTextName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Texto: "
+        android:layout_margin="@dimen/margin_16"
+        android:textSize="@dimen/size_20"
+        app:layout_constraintTop_toBottomOf="@id/tvMsgTitleName"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvMsgTextValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="texto da mensagem aqui"
+        android:layout_margin="@dimen/margin_16"
+        android:textSize="@dimen/size_20"
+        app:layout_constraintTop_toBottomOf="@id/tvMsgTitleName"
+        app:layout_constraintStart_toEndOf="@id/tvMsgTextName"/>
+
+    <Button
+        android:id="@+id/btnGetToken"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvMsgTextValue"
+        android:layout_margin="30dp"
+        android:text="pegar token"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
