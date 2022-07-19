@@ -25,13 +25,12 @@ class MainActivity : AppCompatActivity() {
 
     private val messageReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent) {
-            val message = intent.extras?.getString("message")
-            val title = intent.extras?.getString("title")
-            viewModel.updateMessage(Message(title,message))
-//            binding.tvMsgTextValue.text = message
-//            binding.tvMsgTitleValue.text = title
+            Message().let {
+                val message = intent.extras?.getString("message")
+                val title = intent.extras?.getString("title")
+                viewModel.updateMessage(Message(title,message))
+            }
 
-            //getMessage(Message(title,message))
         }
     }
 
@@ -41,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        /* Criando uma instancia do local briadcast manager pra checar dados com a label my data, que
+        /* Criando uma instancia do local briadcast manager pra checar dados com as labels, que
         * eu setei lá em MyFirebaseMessagingService */
        LocalBroadcastManager.getInstance(this).registerReceiver(messageReceiver, IntentFilter("Mensagem"))
        LocalBroadcastManager.getInstance(this).registerReceiver(messageReceiver, IntentFilter("Título"))
@@ -83,9 +82,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initObservers() {
-//        viewModel.tokenResponse.observe(this) {
-//            getCurrentMessagingToken()
-//        }
+        viewModel.tokenResponse.observe(this) {
+            getCurrentMessagingToken()
+        }
         viewModel.messageResponse.observe(this) {
             getMessage(Message(it.title, it.body))
         }
@@ -105,6 +104,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getCurrentMessagingToken() {
+
         FirebaseMessaging.getInstance().token.addOnCompleteListener(
             OnCompleteListener { task ->
                 if (!task.isSuccessful) {

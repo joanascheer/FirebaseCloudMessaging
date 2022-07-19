@@ -1,6 +1,9 @@
 package br.com.zup.firebasecloudmessaging.domain
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
@@ -15,45 +18,33 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     private val viewModel = MainViewModel()
     private var broadcaster: LocalBroadcastManager? = null
 
-
     override fun onCreate() {
         broadcaster = LocalBroadcastManager.getInstance(this)
     }
 
-//    override fun onNewToken(token: String) {
-//        viewModel.updateToken(token)
-//        //viewmodel chamando a funcao que eu fiz la
-//     }
+    override fun onNewToken(token: String) {
+        viewModel.updateToken(token)
+     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         handleMessage(remoteMessage)
-//        remoteMessage.notification?.let {
-//            val message = Message(title = it.title.toString(), body = it.body.toString())
-//            viewModel.updateMessage(message)
-//        }
-
-
-
-        //no vm uma funcao que recebe essa msg e faz o mesmo que com o token pra atualizar e observar na activity
-
-        //no vm funcao pra atualizar corpo e titulo msg. recebe token e atualiza priv val token. mesmo com msg
-        //chamar no vm que recebe message e atualiza ok
-        //activity os observers da msg e token ok
     }
 
     private fun handleMessage(remoteMessage: RemoteMessage) {
-//You create a handler to get the message and extract the data.
+        //Pegando a mensagem e extraindo os dados dela
         val handler = Handler(Looper.getMainLooper())
 
-        //You use that handler to post the toast through a runnable.
+        //lidando com a mensagem quando o app está em primeiro plano
         handler.post(Runnable {
-            Toast.makeText(baseContext, getString(R.string.handle_notification_now),
-                Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                baseContext, getString(R.string.handle_notification_now),
+                Toast.LENGTH_LONG
+            ).show()
             remoteMessage.notification?.let {
                 val intentBodyMsg = Intent("Mensagem")
                 intentBodyMsg.putExtra("message", it.body)
-                val intentTitleMsg = Intent ("Título")
-                intentTitleMsg.putExtra("title", it.title )
+                val intentTitleMsg = Intent("Título")
+                intentTitleMsg.putExtra("title", it.title)
                 broadcaster?.sendBroadcast(intentBodyMsg)
                 broadcaster?.sendBroadcast(intentTitleMsg)
             }
